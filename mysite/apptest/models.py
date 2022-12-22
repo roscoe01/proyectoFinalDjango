@@ -13,6 +13,9 @@ class Piloto(models.Model):
     equipo = models.CharField(max_length=50)
     imagen = models.ImageField(null = True, blank= True, upload_to='img')
 
+    def __str__(self):
+        return self.nombre + ' ' + self.apellido
+
 class Equipo(models.Model):
     nombre = models.CharField(max_length=50)
     paisOrigen = models.CharField(max_length=50)
@@ -23,6 +26,9 @@ class Equipo(models.Model):
     debut =  models.IntegerField()
     campeonatos =  models.IntegerField()
 
+    def __str__(self):
+        return self.nombre
+
 
 
 
@@ -32,6 +38,9 @@ class Usuario(models.Model):
     password = models.CharField(max_length=50)
     nacionalidad = models.CharField(max_length=50)
     fechaNacimiento = models.DateField()
+
+    def __str__(self):
+        return self.nombre + self.email
 
 
 

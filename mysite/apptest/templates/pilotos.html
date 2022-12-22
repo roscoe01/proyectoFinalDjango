@@ -47,18 +47,18 @@
                     {% for piloto in pilotos %}
                     <div class="col mb-5">
                         <div class="card h-100">
-                            <!-- Product image-->
-                            <img class="card-img-top" src="https://formula1.lne.es/media/pilotos/medium/lewis-hamilton.jpg" alt="..." />
-                            <!-- Product details-->
+
+                            <img class="card-img-top" src="{{ url_for('static', filename = 'css/images/icons/resultset_previous.png') }}" alt="..." />
+
                             <div class="card-body p-4">
                                 <div class="text-center">
-                                    <h5 class="fw-bolder">{{piloto.nombre}} {{piloto.apellido}}</h5>
+                                    <h5 class="fw-bolder"> {{piloto.nombre}} {{piloto.apellido}} </h5>
 
                                 </div>
                             </div>
-                            <!-- Product actions-->
+
                             <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                                <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">Ver piloto</a></div>
+                                <div class="text-center"><a class="btn btn-outline-danger mt-auto" href="{% url 'piloto' piloto.id %}">Ver piloto</a></div>
                             </div>
                         </div>
                     </div>
@@ -70,7 +70,7 @@
         </section>
         <!-- Footer-->
         <footer class="py-5 bg-dark">
-            <div class="container"><p class="m-0 text-center text-white">Copyright &copy; Your Website 2022</p></div>
+            <div class="container"><p class="m-0 text-center text-white">Copyright &copy; Página creada con fines de aprendizaje.</p></div>
         </footer>
         
         <!-- Bootstrap core JS-->

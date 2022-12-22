@@ -10,8 +10,6 @@ from django.http import HttpResponse
 def paginaInicio(request):
     return render (request, "landingpage.html")
 
-def productos(request):
-    return render (request, "productos.html")
 
 def registro(request):
 
@@ -28,7 +26,6 @@ def registro(request):
         
         return render (request, "landingpage.html")
 
-        
 
     return render (request, "registro.html")
 
@@ -43,6 +40,8 @@ def pilotos(request):
 
 
 
-def piloto_por_id(request):
-    piloto = Piloto.objects.get(pk=piloto_por_id)
-    return render(request, "piloto.html")
+def piloto_por_id(request,id):
+    
+    piloto = Piloto.objects.get(pk=id)
+
+    return render(request, "piloto.html", {"piloto": piloto})
