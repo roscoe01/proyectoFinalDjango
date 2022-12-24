@@ -12,3 +12,7 @@ Los 3 estuvimos tomando nota de las funciones aprendidas durante el curso y nos 
 Disfrutamos mucho el curso y aprendimos un montón realizando este proyecto, enjoy! :D
 
 ![alt text](https://raw.githubusercontent.com/roscoe01/proyectoFinalDjango/master/apptest/static/assets/readme%20image.jpg)
+
+![alt text](https://raw.githubusercontent.com/roscoe01/proyectoFinalDjango/master/apptest/static/assets/readme%20image%202.jpg)
+
+![alt text](https://raw.githubusercontent.com/roscoe01/proyectoFinalDjango/master/apptest/static/assets/readme%20image%203.jpg)
