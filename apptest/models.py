@@ -30,17 +30,3 @@ class Equipo(models.Model):
         return self.nombre
 
 
-
-
-class Usuario(models.Model):
-    nombre = models.CharField(max_length=100)
-    email = models.CharField(max_length=50)
-    password = models.CharField(max_length=50)
-    nacionalidad = models.CharField(max_length=50)
-    fechaNacimiento = models.DateField()
-
-    def __str__(self):
-        return self.nombre + self.email
-
-
-

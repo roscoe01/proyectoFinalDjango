@@ -6,7 +6,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>Piloto</title>
+        <title>{{piloto.nombre}} {{piloto.apellido}} - Piloto</title>
         <!-- Favicon-->
         <link rel="icon" type="image/x-icon" href="{% static 'assets/icono.png' %}"/>
         <!-- Bootstrap icons-->
@@ -25,10 +25,15 @@
                     Wiki F1
                 </a>
                 <div class="container">
-                    <a class="btn btn-sm btn-outline-secondary" href="{% url 'pilotos'%}">Pilotos</a>
-                    <a class="btn btn-sm btn-outline-secondary" href="{% url 'registro' %}"">Registrarse</a>
+                    {% if user.is_authenticated %}
+                    <a class="btn btn-sm btn-outline-warning ms-5" href="{% url 'pilotos'%}">Pilotos</a>
+                    <a class="btn btn-sm btn-outline-danger ms-5" href="{% url 'logout' %}"">Cerrar Sesión</a>
+                    {% else %}
+                    <a class="btn btn-sm btn-outline-warning ms-5" href="{% url 'registro' %}"">Registrarse</a>
+                    <a class="btn btn-sm btn-outline-success ms-5" href="{% url 'login' %}"">Iniciar Sesión</a>
+                    {% endif %}
                 </div>
-
+    
             </div>
         </nav>
 

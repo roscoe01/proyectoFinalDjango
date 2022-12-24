@@ -1,35 +1,24 @@
 from django.shortcuts import render
 
-from django.shortcuts import render
-
 from .models import *
 
 from django.http import HttpResponse
+
+from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
+from django.contrib.auth import login, logout, authenticate
+
+from apptest.forms import UsuarioForm
+
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.decorators import login_required
 
 
 def paginaInicio(request):
     return render (request, "landingpage.html")
 
 
-def registro(request):
 
-    if request.method == "POST":
-        nombreu = request.POST["username"]
-        contra = request.POST["password"] 
-        correo = request.POST["email"] 
-        nacion = request.POST["pais"] 
-        nacimiento = request.POST["fechaNac"] 
-        
-        usuario = Usuario(nombre=nombreu,email=correo,password=contra,nacionalidad=nacion,fechaNacimiento=nacimiento)
-        
-        usuario.save()
-        
-        return render (request, "landingpage.html")
-
-
-    return render (request, "registro.html")
-
-
+@login_required
 def pilotos(request):
 
     allPilotos = Piloto.objects.all()
@@ -39,9 +28,61 @@ def pilotos(request):
 
 
 
-
+@login_required
 def piloto_por_id(request,id):
     
     piloto = Piloto.objects.get(pk=id)
 
     return render(request, "piloto.html", {"piloto": piloto})
+
+
+
+def login_request(request):
+    if request.method == "POST":
+        form=AuthenticationForm(request, data=request.POST) ## Traigo el formulario lleno.
+
+        if form.is_valid():
+            user = form.cleaned_data.get("username")
+            contra = form.cleaned_data.get("password")
+
+            usuario = authenticate(username=user,password=contra) #Busca un usuario con esas credenciales, si no lo existe trae none.
+
+            if usuario is not None:
+                login(request,usuario)
+                return render(request, 'landingpage.html', {'mensaje':f"{usuario}"})
+            else:
+                return render(request, 'login.html', {'mensaje':f"Usuario o contraseña incorrectos","form":form})
+
+        else:
+            return render(request, 'login.html', {'mensaje':f"Usuario o contraseña incorrectos","form":form})
+
+    else:
+        form = AuthenticationForm()
+
+    return render(request, "login.html", {"form":form})
+
+
+
+
+def registro(request):
+    if request.method == "POST":
+        form=UsuarioForm(request.POST)
+        if form.is_valid():
+
+            username=form.cleaned_data.get("username")
+            form.save()
+            return render(request, 'login.html' , {"exito": f"Usuario {username} creado correctamente, porfavor inicia sesión"})
+        else:
+            print(form.errors)
+            print(form.cleaned_data)
+            return render(request, 'registro.html' , {"form":form, "mensaje": "Error al crear el usuario, intentalo nuevamente"})
+
+
+    else:
+        form=UsuarioForm()
+    
+    return render(request, "registro.html", {"form":form})
+
+
+def terminosycondiciones(request):
+    return render(request, "terminosycondiciones.html")
