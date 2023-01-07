@@ -13,3 +13,8 @@ class UsuarioForm(UserCreationForm):
         model = User
         fields = ["username", "email", "password1", "password2"]
         help_texts = {k:"" for k in fields} #para cada uno de los campos del formulario, le asigna un valor vacio
+
+
+class MensajeForm(forms.Form):
+    receptor = forms.ModelChoiceField(User.objects.all(),widget=forms.Select(attrs={'type':"username", 'class':"form-control", 'id':"username", 'name':"username"}))
+    mensaje = forms.CharField(max_length=5000,widget=forms.Textarea(attrs={'type':"username", 'class':"form-control", 'id':"username" , 'placeholder': "Escribe tu mensaje aqui", 'name':"username"}))

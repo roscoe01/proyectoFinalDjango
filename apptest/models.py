@@ -1,6 +1,12 @@
 from django.db import models
+from django.conf import settings
+from datetime import datetime
 
 
+
+user = settings.AUTH_USER_MODEL
+from django.contrib.auth.models import User
+from django.db import models
 
 
 class Piloto(models.Model):
@@ -30,3 +36,8 @@ class Equipo(models.Model):
         return self.nombre
 
 
+class Mensaje(models.Model):
+    emisor = models.ForeignKey(User, on_delete=models.CASCADE, related_name='sender')
+    receptor = models.ForeignKey(User, on_delete=models.CASCADE, related_name='receiver')
+    contenido = models.TextField(max_length=5000)
+    horario = models.DateTimeField(auto_now_add=True)

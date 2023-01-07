@@ -12,5 +12,9 @@ urlpatterns = [
     path('piloto/<id>', piloto_por_id, name="piloto"),
     path('login', login_request , name="login"),
     path('logout', LogoutView.as_view(), name='logout'),
-    path('terminosycondiciones', terminosycondiciones, name='terminosycondiciones')
+    path('terminosycondiciones', terminosycondiciones, name='terminosycondiciones'),
+    path('mensajes' , mensajes, name='mensajes'),
+    path('mensajesEnviados' , mensajesEnviados, name='mensajesEnviados'),
+    path('mensajesRecibidos' , mensajesRecibidos, name='mensajesRecibidos'),
+    path('enviarMensajes' , enviarMensaje, name='enviarMensaje')
 ]

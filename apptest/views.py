@@ -7,7 +7,7 @@ from django.http import HttpResponse
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.contrib.auth import login, logout, authenticate
 
-from apptest.forms import UsuarioForm
+from apptest.forms import UsuarioForm, MensajeForm
 
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
@@ -86,3 +86,52 @@ def registro(request):
 
 def terminosycondiciones(request):
     return render(request, "terminosycondiciones.html")
+
+
+@login_required
+def mensajes(request):
+    return render(request, 'mensajes.html')
+
+
+@login_required
+def enviarMensaje(request):
+    usuario=request.user 
+    if request.method == 'POST':
+        form = MensajeForm(request.POST)
+        formulario = MensajeForm()
+        
+        if form.is_valid():
+            info = form.cleaned_data
+            print(info)
+
+            
+            destinatario = info['receptor']
+            contenido = info['mensaje']
+            
+
+            mensaje = Mensaje(emisor=(usuario), receptor= (destinatario), contenido=contenido)
+            mensaje.save()
+
+            return render(request, 'enviarMensaje.html', {"form": formulario, "mensaje": "Mensaje enviado exitosamente!"} )
+        else:
+            return render(request, 'landingPage.html', {"mensaje": "Hubo un error en el formulario, vuelve a intentarlo y no olvides rellenar todos los campos!"} )
+
+    else:
+        formulario = MensajeForm()
+       
+    return render(request, 'enviarMensaje.html', {"form": formulario} )
+
+    
+@login_required
+def mensajesRecibidos(request):
+    usuario = request.user
+    mensajes = Mensaje.objects.filter(receptor = usuario)
+    
+    return render(request, "mensajesRecibidos.html", {"mensajes": mensajes})
+    
+@login_required
+def mensajesEnviados(request):
+    usuario = request.user
+    mensajes = Mensaje.objects.filter(emisor = usuario)
+    
+    return render(request, "mensajesEnviados.html", {"mensajes": mensajes})

@@ -5,3 +5,4 @@ from .models import *
 
 admin.site.register(Piloto)
 admin.site.register(Equipo)
+admin.site.register(Mensaje)
