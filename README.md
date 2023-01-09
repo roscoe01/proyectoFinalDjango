@@ -11,6 +11,8 @@ Los 3 estuvimos tomando nota de las funciones aprendidas durante el curso y nos 
 
 Casos de Prueba aquí: https://docs.google.com/spreadsheets/d/18GhfEvMP8LTj2o8EV6QFolyiECe7iES_QBxNcQloJsI/edit?usp=sharing
 
+Video de Prueba en Youtube aquí: https://youtu.be/9winjMfY594
+
 
 Disfrutamos mucho el curso y aprendimos un montón realizando este proyecto, enjoy! :D
 
